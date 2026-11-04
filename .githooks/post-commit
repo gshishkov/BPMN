@@ -1,0 +1,17 @@
+#!/bin/sh
+# Appends every commit to history/COMMITS.md.
+# The entry is picked up by the *next* commit (a hook cannot amend its own commit safely).
+
+root=$(git rev-parse --show-toplevel)
+log="$root/history/COMMITS.md"
+
+{
+  printf '\n## %s — %s\n\n' "$(git log -1 --format=%h)" "$(git log -1 --format=%s)"
+  printf -- '- **Date:** %s\n' "$(git log -1 --format=%ci)"
+  printf -- '- **Author:** %s\n' "$(git log -1 --format='%an <%ae>')"
+  printf -- '- **Hash:** %s\n\n' "$(git log -1 --format=%H)"
+  printf '```text\n'
+  git log -1 --format=%B | sed '/^$/N;/^\n$/D'
+  git show --stat --format= HEAD
+  printf '```\n'
+} >> "$log"
