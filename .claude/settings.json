@@ -19,7 +19,9 @@
     "deny": [
       "Read(.env)",
       "Read(.env.*)",
-      "Bash(git push --force:*)"
+      "Bash(git push --force:*)",
+      "Edit(src/data/**)",
+      "Write(src/data/**)"
     ]
   },
   "hooks": {

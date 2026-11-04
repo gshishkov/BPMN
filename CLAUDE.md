@@ -1,6 +1,18 @@
 # BPMN — Project Guide for Claude
 
-Python project for a technical task (details to be added once the task is defined).
+`bpmn_paths`: parses a BPMN 2.0 file into a graph, validates it, and prints every
+start-to-end simple path with the conditions of the traversed sequence flows.
+Run: `uv run python -m bpmn_paths src/data/invoice.bpmn`.
+
+## Hard rules
+
+- **Never claim tests pass unless they were actually run and passed in this session.**
+  Report failures verbatim. Never fabricate output.
+- **Never modify `src/data/*.bpmn`.** They are the task inputs (`invoice-broken.bpmn` is broken on purpose).
+- Standard library only at runtime (`xml.etree.ElementTree`). No new dependencies or
+  abstractions unless the user asks.
+- uv is installed by winget at a path that may not be on `PATH` in Claude's shell yet:
+  `export PATH="$LOCALAPPDATA/Microsoft/WinGet/Packages/astral-sh.uv_Microsoft.Winget.Source_8wekyb3d8bbwe:$PATH"`.
 
 ## Stack & conventions
 
